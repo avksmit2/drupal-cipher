@@ -13,8 +13,10 @@ _A drupal site with a module including a form for a user to input a shift and di
 | Behavior          | Input    | Output |
 | ----------------- | -------- | ------ |
 | the result will be in all lower case | "A" "left" 1 | "z" |
-| spaces, punctuation and numbers will be ignored | "a1_/" "left" 1 | "z1_/" |
 | a letter will be returned based on the shift and direction value | "a" "left" 1 | "z" |
+| a letter will be returned based on the shift and direction value | "ab" "right" 1 | "bc" |
+| each letter in multiple words will be incremented based on the direction and value inputted by the user | "a" "left" 1 | "z" |
+| spaces, punctuation and numbers will be ignored | "a1_/" "left" 1 | "z1_/" |
 | if the end of the alphabet is reached, it will go back to the beginning | "a" "left" 1 | "z" |
 
 ## Prerequisites
