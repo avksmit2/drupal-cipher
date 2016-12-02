@@ -22,6 +22,7 @@
       '#title' => 'Phrase',
       '#type' => 'textfield',
       '#description' => t('Please enter a phrase to encrypt.'),
+      '#element_validate' => array('element_validate_text'),
       '#required' => TRUE,
     );
     $form['direction'] = array(
@@ -46,8 +47,14 @@
   }
 
   function element_validate_direction($element) {
-    if ($element['#value'] != 'right' || $element['#value'] != 'left') {
+    if ($element['#value'] != 'right' && $element['#value'] != 'left') {
       form_error($element, t("Please enter only 'left' or 'right' as a direction."));
+    }
+  }
+
+  function element_validate_text($element) {
+    if (preg_match('/[^a-z\s\'_.,!"$#&:;\/]/', $element['#value'])) {
+      form_error($element, t('Please enter only lowercase letters and punctuation.'));
     }
   }
 
@@ -68,7 +75,7 @@
       }
       $letters = str_split($word);
       foreach($letters as $letter) {
-        if (!preg_match('/\s/', $letter)) {
+        if (preg_match('/[a-z]/', $letter)) {
           if ($increment <= $z_pos && ord($increment >= $a_pos)) {
             $new_letter = array(chr($increment));
           } elseif ($increment > $z_pos) {
@@ -78,7 +85,7 @@
             $num_before_beginning = ($a_pos - ($increment) - 1);
             $new_letter = array((chr(ord('z') - $num_before_beginning)));
           }
-        } else {
+        } elseif (preg_match('/[\s\'_.,!"$#&:;\/]/', $letter)) {
           $new_letter = array($letter);
         }
         $new_word = array_merge($new_word, $new_letter);
