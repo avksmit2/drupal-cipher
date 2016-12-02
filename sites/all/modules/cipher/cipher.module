@@ -1,0 +1,43 @@
+<?php
+  function cipher_menu() {
+    $items['cipher'] = array(
+      'title' => 'Encrypt Phrase',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('cipher_form'),
+      'access callback' => TRUE,
+      'type' => MENU_NORMAL_ITEM,
+    );
+    $items['encryption_display'] = array(
+      'title' => 'Encrypted Phrase Display',
+      'page callback' => 'cipher_display',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+    );
+    return $items
+  }
+
+  function cipher_form() {
+    $form['phrase'] = array(
+      '#title' => 'Phrase',
+      '#type' => 'textfield',
+      '#description' => t('Please enter a phrase to encrypt.'),
+      '#required' => TRUE,
+    );
+    $form['direction'] = array(
+      '#title' => 'Direction',
+      '#type' => 'textfield',
+      '#description' => t('Please enter the direction to use for encryption.'),
+      '#required' => TRUE,
+    );
+    $form['shift'] = array(
+      '#title' => 'Shift Amount',
+      '#type' => 'textfield',
+      '#description' => t('Please enter the number of spaces to shift for encryption.'),
+      '#required' => TRUE,
+    );
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => 'Encrypt!',
+    );
+    return $form;
+  }
