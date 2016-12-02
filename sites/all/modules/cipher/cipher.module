@@ -1,4 +1,5 @@
 <?php
+
   function cipher_menu() {
     $items['cipher'] = array(
       'title' => 'Encrypt Phrase',
@@ -42,24 +43,27 @@
     return $form;
   }
 
+  function cipher_phrase($phrases, $direction, $shift) {
+    $words = str_split($phrases);
+
+
+    return $new_word;
+
+  }
+
   function cipher_form_submit($form, &$form_state) {
-    // $new_word = [];
-    $phrase_words = $form_state['values']['phrase'];
-    // $phrase_words = explode(" ", strtolower($form_state['values']['phrase']));
     $direction = $form_state['values']['direction'];
     $shift = $form_state['values']['shift'];
-    $new_word = chr(ord($phrase_words) + $shift);
+    $phrases = $form_state['values']['phrase'];
+    // $cipher = cipher_phrase($phrases, $direction, $shift);
+    $words = str_split($phrases);
+    $new_word = [];
+    foreach($words as $word) {
+      $new_letter = array((chr(ord($word) + $shift)));
+      $new_word = array_merge($new_word, $new_letter);
+    }
 
-    //
-    // foreach($phrase_words as $word) {
-    //   $letters = explode("", $word);
-    //   foreach($letters as $letter) {
-    //     $new_letter = ++$letter;
-    //     array_push($new_word, $new_letter);
-    //   }
-    // }
-
-    $_SESSION['cipher'] = $new_word;
+    $_SESSION['cipher'] = implode("", $new_word);
 
     $form_state['redirect'] = 'encryption_display';
   }
