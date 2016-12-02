@@ -28,12 +28,14 @@
       '#title' => 'Direction',
       '#type' => 'textfield',
       '#description' => t('Please enter the direction to use for encryption.'),
+      '#element_validate' => array('element_validate_direction'),
       '#required' => TRUE,
     );
     $form['shift'] = array(
       '#title' => 'Shift Amount',
       '#type' => 'textfield',
       '#description' => t('Please enter the number of spaces to shift for encryption.'),
+      '#element_validate' => array('element_validate_number'),
       '#required' => TRUE,
     );
     $form['submit'] = array(
@@ -41,6 +43,12 @@
       '#value' => 'Encrypt!',
     );
     return $form;
+  }
+
+  function element_validate_direction($element) {
+    if ($element['#value'] != 'right' || $element['#value'] != 'left') {
+      form_error($element, t("Please enter only 'left' or 'right' as a direction."));
+    }
   }
 
   function cipher_form_submit($form, &$form_state) {
