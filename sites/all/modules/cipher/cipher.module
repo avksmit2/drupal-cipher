@@ -43,24 +43,38 @@
     return $form;
   }
 
-  function cipher_phrase($phrases, $direction, $shift) {
-    $words = str_split($phrases);
-
-
-    return $new_word;
-
-  }
-
   function cipher_form_submit($form, &$form_state) {
     $direction = $form_state['values']['direction'];
     $shift = $form_state['values']['shift'];
     $phrases = $form_state['values']['phrase'];
-    // $cipher = cipher_phrase($phrases, $direction, $shift);
     $words = str_split($phrases);
     $new_word = [];
+    $z_pos = ord('z');
+    $a_pos = ord('a');
+
     foreach($words as $word) {
-      $new_letter = array((chr(ord($word) + $shift)));
-      $new_word = array_merge($new_word, $new_letter);
+      if ($direction == 'right') {
+        $increment = ord($word) + $shift;
+      } elseif ($direction == 'left') {
+        $increment = ord($word) - $shift;
+      }
+      $letters = str_split($word);
+      foreach($letters as $letter) {
+        if (!preg_match('/\s/', $letter)) {
+          if ($increment <= $z_pos && ord($increment >= $a_pos)) {
+            $new_letter = array(chr($increment));
+          } elseif ($increment > $z_pos) {
+            $num_past_end = (($increment) - $z_pos) - 1;
+            $new_letter = array((chr(ord('a') + $num_past_end)));
+          } elseif ($increment < $a_pos) {
+            $num_before_beginning = ($a_pos - ($increment) - 1);
+            $new_letter = array((chr(ord('z') - $num_before_beginning)));
+          }
+        } else {
+          $new_letter = array($letter);
+        }
+        $new_word = array_merge($new_word, $new_letter);
+      }
     }
 
     $_SESSION['cipher'] = implode("", $new_word);
