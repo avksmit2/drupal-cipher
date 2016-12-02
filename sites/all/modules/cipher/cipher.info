@@ -3,4 +3,3 @@ description = Displays an encrypted phrase using an input form.
 package = Add Modules
 core = 7.x
 files[] = cipher.module
-stylesheets[all][] = cipher_styles.css

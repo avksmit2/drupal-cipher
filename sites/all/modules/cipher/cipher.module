@@ -53,7 +53,7 @@
   }
 
   function element_validate_text($element) {
-    if (preg_match('/[^a-z\s\'_.,!"$#&:;\/]/', $element['#value'])) {
+    if (preg_match('/[^a-z\s\'_.,\'!"$#&:;\/]/', $element['#value'])) {
       form_error($element, t('Please enter only lowercase letters and punctuation.'));
     }
   }

@@ -1,0 +1,56 @@
+body #wrap {
+  background-color: #ba8fba;
+}
+
+.right-corner .left-corner {
+  background-image: url(/sites/default/files/sweaver/sweaver_image_3.jpg);
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+}
+
+#block-system-powered-by .content {
+  background-image: url(/sites/default/files/sweaver/sweaver_image_3.jpg);
+}
+
+div .form-item {
+  background-image: none;
+  color: #c0f2bd;
+  text-align: left;
+  font-weight: bold;
+  font-style: italic;
+}
+
+form {
+  background-image: url(/sites/default/files/sweaver/sweaver_image_3.jpg);
+}
+
+form div {
+  background-image: none;
+}
+
+.form-item .description {
+  font-size: 22.48px;
+  color: #5fd9ac;
+}
+
+.form-item label {
+  font-size: 26.16px;
+}
+
+.form-item .form-text {
+  font-size: 19.16px;
+}
+
+#tabs-wrapper h1 {
+  font-weight: bold;
+  font-size: 45.456px;
+}
+
+div .form-submit {
+  font-size: 27px;
+}
+
+.form-submit {
+  background-position: 0% 0%;
+}
+
